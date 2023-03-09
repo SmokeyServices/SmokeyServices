@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<!-- <html lang="fr" manifest="cache.manifest"> --><html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>DataParis - Des donn&eacute;es sur Paris et les Parisiens localis&eacute;es par le biais du r&eacute;seau m&eacute;tropolitain</title>
+<meta name="description" content="DataParis est une data visualisation qui met en avant des donn&eacute;es sur Paris et les Parisiens localis&eacute;es par le biais du r&eacute;seau m&eacute;tropolitain">
+<meta name="author" content="Gilles Bertaux, R&eacute;mi Fayolle, Vincent Garreau, Robin Lambert">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" type="image/x-icon" href="favicons/6048-img-favicon.ico">
+<link rel="stylesheet" media="screen" href="css/css-style.css">
+<!--[if lt IE 9]><script>window.location = "http://dataparis.io/404.html";</script><![endif]-->
+<meta property="og:url" content="http://dataparis.io">
+<meta property="og:site_name" content="DataParis.io">
+<meta property="og:title" content="DataParis.io - Une dataviz interactive sur Paris et les Parisiens">
+<meta property="og:description" content="DataParis est une data visualisation qui met en avant des donn&eacute;es sur Paris et les Parisiens localis&eacute;es par le biais du r&eacute;seau m&eacute;tropolitain.">
+<meta property="og:image" content="http://dataparis.io/img/dataparis-fb.jpg">
+<meta property="og:type" content="website">
+</head>
+<body>
+
+
+<!--- ========= LAUNCH ========= -->
+<div id="launchsection">
+	<div class="landingbg"></div>
+	<div class="landinginfos">
+		<h1>DataParis</h1>
+		<h2>Des donn&eacute;es sur Paris et les Parisiens <br>localis&eacute;es par le biais du r&eacute;seau m&eacute;tropolitain</h2>
+		<a href="#" id="launchbt">Lancer la visualisation</a>
+	</div>
+</div>
+
+
+<!--- ========= MAP ========= -->
+<div id="mapsection" style="opacity:0">
+
+	<div class="tuto_nav">
+		<div class="tuto_rubric">Choix de la rubrique</div>
+		<div class="tuto_metros">Filtre par ligne</div>
+	</div>
+
+	<!-- Titles -->
+	<div class="bg_maintitles hide"></div>
+	<div class="maintitles hide">
+		<h1>Revenu moyen</h1>
+		<h2><span class="subtitle">Revenu net annuel d&eacute;clar&eacute; moyen par foyer fiscal</span> <span class="infosdata"></span></h2>
+		<h3>Moyenne des stations : <span class="average">56%</span></h3>
+		<!--<img src="img/preloader.gif" width="60" height="8" alt="Loading..." />-->
+		<span id="preloader" class="hide">Chargement des donn&eacute;es...</span>
+		<div class="infosbox">
+			<div class="box_r_income show">
+				<p>Revenu net annuel moyen par foyer fiscal.</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_tax">
+				<p>Imp&ocirc;t annuel moyen par foyer fiscal.</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_politics">
+				<p>R&eacute;sultats du second tour de l'&eacute;lection pr&eacute;sidentielle 2012.</p>
+				<p>Ann&eacute;e : 2012.</p>
+				<p>Source : <a target="_blank" href="http://www.interieur.gouv.fr/Elections/Les-resultats/Presidentielles/elecresult__PR2012/">Minist&egrave;re de l'Int&eacute;rieur</a>.</p>
+			</div>
+			<div class="box_r_unemployment">
+				<p>Nombre de ch&ocirc;meurs par rapport &agrave; la population de 15 ans ou plus.</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_students">
+				<p>Nombre d'&eacute;tudiants par rapport &agrave; la population active de 15 &agrave; 64 ans.</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_highdiploma">
+				<p>Nombre de diplom&eacute;s de l'enseignement sup&eacute;rieur long par rapport &agrave; la population non scolaris&eacute;e.<br>Dipl&ocirc;mes de l'enseignement sup&eacute;rieur long : licence, ma&icirc;trise, master, DEA, DESS, doctorat, &eacute;cole sup&eacute;rieure niveau licence et plus (hors DEUG, DUT, BTS, dipl&ocirc;me param&eacute;dical ou social...).</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_singles">
+				<p>Nombre de c&eacute;libataires par rapport &agrave; la population de 15 ans ou plus.</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_married">
+				<p>Nombre de mari&eacute;es par rapport &agrave; la population de 15 ans ou plus.</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_retired">
+				<p>Nombre de retrait&eacute;s par rapport &agrave; la population de 15 ans ou plus.</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_age">
+				<p>Moyenne pond&eacute;r&eacute;e : Moyenne de la tranche d'&acirc;ge cibl&eacute;e multipli&eacute;e par la part de la tranche d'&acirc;ge cibl&eacute;e en pourcentage dans la population, chaque tranche d'&acirc;ge r&eacute;p&eacute;tant ce proc&eacute;d&eacute;, le tout &eacute;tant additionn&eacute; et divis&eacute; par 100.<br>Tranches d'&acirc;ge : 0-14, 15-29, 30-44, 45-59, 60-74, 75-89, 90+ (92 appliqu&eacute;).</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_sex">
+				<p>Nombre de femmes et d'hommes par rapport &agrave; l'ensemble de la population.</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_density">
+				<p>Nombre d'habitants au km&sup2;.</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_pricesquare">
+				<p>Prix des appartement anciens (de plus de 5 ans).</p>
+				<p>Ann&eacute;e : 1er trimestre 2013.</p>
+				<p>Source : <a target="_blank" href="http://basebien.com/">Base BIEN</a>, <a target="_blank" href="http://insee.fr">Notaires-INSEE</a>.</p>
+			</div>
+			<div class="box_r_owners">
+				<p>Nombre de m&eacute;nages propri&eacute;taires de leur r&eacute;sidence principal par rapport &agrave; l'ensemble des r&eacute;sidences principales.</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_tenants">
+				<p>Nombre de m&eacute;nages locataires de leur r&eacute;sidence principal par rapport &agrave; l'ensemble des r&eacute;sidences principales.</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_secondresidence">
+				<p>Nombre de r&eacute;sidences secondaires et logements occasionnels (hors logements vacants) par rapport &agrave; l'ensemble des logements.</p>
+				<p>Ann&eacute;e : 2009.</p>
+				<p>Source : <a target="_blank" href="http://insee.fr">INSEE</a>.</p>
+			</div>
+			<div class="box_r_trafic">
+				<p>Trafic entrant par station (les voyageurs en correspondance sur le r&eacute;seau RATP ne sont pas comptabilis&eacute;s).</p>
+				<p>Ann&eacute;e : 2011.</p>
+				<p>Source : <a target="_blank" href="http://data.ratp.fr/fr/les-donnees/fiche-de-jeu-de-donnees/dataset/trafic-annuel-entrant-par-station-2011.html">RATP</a>.</p>
+			</div>
+		</div>
+	</div>
+
+	<nav class="mainnav">
+		<!-- Zoom -->
+		<ul class="navzoom hide">
+			<li class="zoomIn"><span>+</span></li>
+			<li class="zoomOut"><span>-</span></li>
+		</ul>
+		
+		<!-- List lines -->
+		<ul class="selectlines">
+			<li class="hide inithide" data-line="m1_s">1</li>
+			<li class="hide inithide" data-line="m2_s">2</li>
+			<li class="hide inithide" data-line="m3_s">3</li>
+			<li class="hide inithide" data-line="m4_s">3 <span>bis</span></li>
+			<li class="hide inithide" data-line="m5_s">4</li>
+			<li class="hide inithide" data-line="m6_s">5</li>
+			<li class="hide inithide" data-line="m7_s">6</li>
+			<li class="hide inithide" data-line="m8_s">7</li>
+			<li class="hide inithide" data-line="m9_s">7 <span>bis</span></li>
+			<li class="hide inithide" data-line="m10_s">8</li>
+			<li class="hide inithide" data-line="m11_s">9</li>
+			<li class="hide inithide" data-line="m12_s">10</li>
+			<li class="hide inithide" data-line="m13_s">11</li>
+			<li class="hide inithide" data-line="m14_s">12</li>
+			<li class="hide inithide" data-line="m15_s">13</li>
+			<li class="hide inithide" data-line="m16_s">14</li>
+		</ul>
+		<span class="toggleViewAll"></span>
+
+		<!-- List rubrics -->
+		<ul class="rubrics">
+			<li data-rubric="r_income" data-title="Revenu" data-subtitle="Revenu net annuel moyen par foyer fiscal" class="r_income inithide"><a href="#income">Revenu</a></li>
+
+			<li data-rubric="r_tax" data-title="Imp&ocirc;t" data-subtitle="Imp&ocirc;t annuel moyen par foyer fiscal" class="r_tax inithide"><a href="#tax">Imp&ocirc;t</a></li>
+
+			<li data-rubric="r_politics" data-title="Opinion politique" data-subtitle="R&eacute;sultats du second tour de l'&eacute;lection pr&eacute;sidentielle 2012" class="r_politics inithide"><a href="#politics">Opinion politique</a></li>
+
+			<li data-rubric="r_unemployment" data-title="Ch&ocirc;mage" data-subtitle="Taux de ch&ocirc;mage" class="r_unemployment inithide"><a href="#unemployment">Ch&ocirc;mage</a></li>
+
+			<li data-rubric="r_students" data-title="&Eacute;tudiants" data-subtitle="Part des &eacute;tudiants dans la population active de 15 &agrave; 64 ans" class="r_students inithide"><a href="#students">&Eacute;tudiants</a></li>
+
+			<li data-rubric="r_highdiploma" data-title="Dipl&ocirc;m&eacute;s de l'enseignement sup&eacute;rieur long" data-subtitle="Part des dipl&ocirc;m&eacute;s de l'enseignement sup&eacute;rieur long" class="r_highdiploma inithide"><a href="#highdiploma">Dipl&ocirc;m&eacute;s de l'enseignement sup&eacute;rieur long</a></li>
+
+			<li data-rubric="r_singles" data-title="C&eacute;libataires" data-subtitle="Part des c&eacute;libataires dans la population de 15 ans ou plus" class="r_singles inithide"><a href="#singles">C&eacute;libataires</a></li>
+
+			<li data-rubric="r_married" data-title="Mari&eacute;s" data-subtitle="Part des mari&eacute;s dans la population de 15 ans ou plus" class="r_married inithide"><a href="#married">Mari&eacute;s</a></li>
+
+			<li data-rubric="r_retired" data-title="Retrait&eacute;s" data-subtitle="Part des retrait&eacute;s dans la population de 15 ans ou plus" class="r_retired inithide"><a href="#retired">Retrait&eacute;s</a></li>
+
+			<li data-rubric="r_age" data-title="&Acirc;ge moyen" data-subtitle="&Acirc;ge moyen de la population" class="r_age inithide"><a href="#age">&Acirc;ge moyen</a></li>
+
+			<li data-rubric="r_sex" data-title="Sexe" data-subtitle="Part des femmes et des hommes dans l'ensemble de la population" class="r_sex inithide"><a href="#sex">Sexe</a></li>
+
+			<li data-rubric="r_density" data-title="Densit&eacute; de la population" data-subtitle="Densit&eacute; moyenne de la population (habitants au km&sup2;)" class="r_density inithide"><a href="#density">Densit&eacute; de population</a></li>
+
+			<li data-rubric="r_pricesquare" data-title="Prix de l'immobilier" data-subtitle="Prix des appartements de plus de 5 ans" class="r_pricesquare inithide"><a href="#pricesquare">Prix de l'immobilier</a></li>
+
+			<li data-rubric="r_owners" data-title="Propri&eacute;taire de son logement" data-subtitle="Part des m&eacute;nages propri&eacute;taires de leur r&eacute;sidence principale" class="r_owners inithide"><a href="#owners">Propri&eacute;taire de son logement</a></li>
+
+			<li data-rubric="r_tenants" data-title="Locataire de son logement" data-subtitle="Part des m&eacute;nages locataires de leur r&eacute;sidence principale" class="r_tenants inithide"><a href="#tenants">Locataire de son logement</a></li>
+
+			<li data-rubric="r_secondresidence" data-title="R&eacute;sidences secondaires" data-subtitle="Part des r&eacute;sidences secondaires dans l'ensemble des logements" class="r_secondresidence inithide"><a href="#secondresidence">R&eacute;sidences secondaires</a></li>
+
+			<li data-rubric="r_trafic" data-title="Trafic annuel par station" data-subtitle="Nombre de voyageurs ayant valid&eacute; un titre de transport dans la station concern&eacute;e en 2011" class="r_trafic inithide"><a href="#trafic">Trafic annuel par station</a></li>
+		</ul>
+	</nav>
+
+	<!-- Station box -->
+	<div class="stationbox hide">
+		<ul>
+			<li class="stationname">Champs-&Eacute;lys&eacute;es</li>
+			<li class="stationdistrict">VIIe arrondissement</li>
+		</ul>
+		<ul class="stationconnection">
+		</ul>
+		<span class="stationdata">4567&euro;</span>
+		<span class="stationcompare"><span class="comparevalue">+1375 &euro;</span> par rapport &agrave; la moyenne</span>
+	</div>
+	
+	<!-- Map -->
+	<div class="wrapmap">
+		<ul class="stations hide rotate45">
+			<li>
+				<ul id="m1_s" data-line="1">
+					<li class="s1" data-id="1">La D&eacute;fense</li>
+					<li class="s2" data-id="2">Esplanade de La D&eacute;fense</li>
+					<li class="s3" data-id="3">Pont de Neuilly</li>
+					<li class="s4" data-id="4">Les Sablons</li>
+					<li class="s5" data-id="5">Porte Maillot</li>
+					<li class="s6" data-id="6">Argentine</li>
+					<li class="s7" data-id="7">Charles de Gaulle - &Eacute;toile</li>
+					<li class="s8" data-id="8">George V</li>
+					<li class="s9" data-id="9">Franklin D. Roosevelt</li>
+					<li class="s10" data-id="10">Champs-&Eacute;lys&eacute;es - Clemenceau</li>
+					<li class="s11" data-id="11">Concorde</li>
+					<li class="s12" data-id="12">Tuileries</li>
+					<li class="s13" data-id="13">Palais Royal - Mus&eacute;e du Louvre</li>
+					<li class="s14" data-id="14">Louvre - Rivoli</li>
+					<li class="s15" data-id="15">Ch&acirc;telet</li>
+					<li class="s16" data-id="16">H&ocirc;tel de Ville</li>
+					<li class="s17" data-id="17">Saint-Paul (Le Marais)</li>
+					<li class="s18" data-id="18">Bastille</li>
+					<li class="s19" data-id="19">Gare de Lyon</li>
+					<li class="s20" data-id="20">Reuilly - Diderot</li>
+					<li class="s21" data-id="21">Nation</li>
+					<li class="s22" data-id="22">Porte de Vincennes</li>
+					<li class="s23" data-id="23">Saint-Mand&eacute;</li>
+					<li class="s24" data-id="24">B&eacute;rault</li>
+					<li class="s25" data-id="25">Ch&acirc;teau de Vincennes</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m2_s" data-line="2">
+					<li class="s1" data-id="1">Porte Dauphine</li>
+					<li class="s2" data-id="2">Victor Hugo</li>
+					<li class="s3" data-id="3">Charles de Gaulle - &Eacute;toile</li>
+					<li class="s4" data-id="4">Ternes</li>
+					<li class="s5" data-id="5">Courcelles</li>
+					<li class="s6" data-id="6">Monceau</li>
+					<li class="s7" data-id="7">Villiers</li>
+					<li class="s8" data-id="8">Rome</li>
+					<li class="s9" data-id="9">Place de Clichy</li>
+					<li class="s10" data-id="10">Blanche</li>
+					<li class="s11" data-id="11">Pigalle</li>
+					<li class="s12" data-id="12">Anvers</li>
+					<li class="s13" data-id="13">Barb&egrave;s - Rochechouart</li>
+					<li class="s14" data-id="14">La Chapelle</li>
+					<li class="s15" data-id="15">Stalingrad</li>
+					<li class="s16" data-id="16">Jaur&egrave;s</li>
+					<li class="s17" data-id="17">Colonel Fabien</li>
+					<li class="s18" data-id="18">Belleville</li>
+					<li class="s19" data-id="19">Couronnes</li>
+					<li class="s20" data-id="20">M&eacute;nilmontant</li>
+					<li class="s21" data-id="21">P&egrave;re Lachaise</li>
+					<li class="s22" data-id="22">Philippe Auguste</li>
+					<li class="s23" data-id="23">Alexandre Dumas</li>
+					<li class="s24" data-id="24">Avron</li>
+					<li class="s25" data-id="25">Nation</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m3_s" data-line="3">
+					<li class="s1" data-id="1">Pont de Levallois - B&eacute;con</li>
+					<li class="s2" data-id="2">Anatole France</li>
+					<li class="s3" data-id="3">Louise Michel</li>
+					<li class="s4" data-id="4">Porte de Champerret</li>
+					<li class="s5" data-id="5">Pereire</li>
+					<li class="s6" data-id="6">Wagram</li>
+					<li class="s7" data-id="7">Malesherbes</li>
+					<li class="s8" data-id="8">Villiers</li>
+					<li class="s9" data-id="9">Europe</li>
+					<li class="s10" data-id="10">Saint-Lazare</li>
+					<li class="s11" data-id="11">Havre - Caumartin</li>
+					<li class="s12" data-id="12">Op&eacute;ra</li>
+					<li class="s13" data-id="13">Quatre-Septembre</li>
+					<li class="s14" data-id="14">Bourse</li>
+					<li class="s15" data-id="15">Sentier</li>
+					<li class="s16" data-id="16">R&eacute;aumur - S&eacute;bastopol</li>
+					<li class="s17" data-id="17">Arts et M&eacute;tiers</li>
+					<li class="s18" data-id="18">Temple</li>
+					<li class="s19" data-id="19">R&eacute;publique</li>
+					<li class="s20" data-id="20">Parmentier</li>
+					<li class="s21" data-id="21">Rue Saint-Maur</li>
+					<li class="s22" data-id="22">P&egrave;re Lachaise</li>
+					<li class="s23" data-id="23">Gambetta</li>
+					<li class="s24" data-id="24">Porte de Bagnolet</li>
+					<li class="s25" data-id="25">Gallieni</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m4_s" data-line="4">
+					<li class="s1" data-id="1">Gambetta</li>
+					<li class="s2" data-id="2">Pelleport</li>
+					<li class="s3" data-id="3">Saint-Fargeau</li>
+					<li class="s4" data-id="4">Porte des Lilas</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m5_s" data-line="5">
+					<li class="s1" data-id="1">Mairie de Montrouge</li>
+					<li class="s2" data-id="2">Porte d'Orl&eacute;ans</li>
+					<li class="s3" data-id="3">Al&eacute;sia</li>
+					<li class="s4" data-id="4">Mouton-Duvernet</li>
+					<li class="s5" data-id="5">Denfert-Rochereau</li>
+					<li class="s6" data-id="6">Raspail</li>
+					<li class="s7" data-id="7">Vavin</li>
+					<li class="s8" data-id="8">Montparnasse Bienven&uuml;e</li>
+					<li class="s9" data-id="9">Saint-Placide</li>
+					<li class="s10" data-id="10">Saint-Sulpice</li>
+					<li class="s11" data-id="11">Saint-Germain-des-Pr&eacute;s</li>
+					<li class="s12" data-id="12">Od&eacute;on</li>
+					<li class="s13" data-id="13">Saint-Michel</li>
+					<li class="s14" data-id="14">Cit&eacute;</li>
+					<li class="s15" data-id="15">Ch&acirc;telet</li>
+					<li class="s16" data-id="16">Les Halles</li>
+					<li class="s17" data-id="17">&Eacute;tienne Marcel</li>
+					<li class="s18" data-id="18">R&eacute;amur - S&eacute;bastopol</li>
+					<li class="s19" data-id="19">Starsbourg Saint-Denis</li>
+					<li class="s20" data-id="20">Ch&acirc;teau d'Eau</li>
+					<li class="s21" data-id="21">Gare de l'Est</li>
+					<li class="s22" data-id="22">Gare du Nord</li>
+					<li class="s23" data-id="23">Barb&egrave;s - Rochechouart</li>
+					<li class="s24" data-id="24">Ch&acirc;teau Rouge</li>
+					<li class="s25" data-id="25">Marcadet Poissonniers</li>
+					<li class="s26" data-id="26">Simplon</li>
+					<li class="s27" data-id="27">Porte de Clignancourt</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m6_s" data-line="6">
+					<li class="s1" data-id="1">Place d'Italie</li>
+					<li class="s2" data-id="2">Campo-Formio</li>
+					<li class="s3" data-id="3">Saint-Michel</li>
+					<li class="s4" data-id="4">Gare d'Austerlitz</li>
+					<li class="s5" data-id="5">Quai de la Rap&eacute;e</li>
+					<li class="s6" data-id="6">Bastille</li>
+					<li class="s7" data-id="7">Br&eacute;guet - Sabin</li>
+					<li class="s8" data-id="8">Richard-Lenoir</li>
+					<li class="s9" data-id="9">Oberkampf</li>
+					<li class="s10" data-id="10">R&eacute;publique</li>
+					<li class="s11" data-id="11">Jacques Bonsergent</li>
+					<li class="s12" data-id="12">Gare de l'Est</li>
+					<li class="s13" data-id="13">Gare du Nord</li>
+					<li class="s14" data-id="14">Stalingrad</li>
+					<li class="s15" data-id="15">Jaur&egrave;s</li>
+					<li class="s16" data-id="16">Laumi&egrave;re</li>
+					<li class="s17" data-id="17">Ourcq</li>
+					<li class="s18" data-id="18">Porte de Pantin</li>
+					<li class="s19" data-id="19">Hoche</li>
+					<li class="s20" data-id="20">&Eacute;glise de Pantin</li>
+					<li class="s21" data-id="21">Bobigny - Pantin - Raymond Queneau</li>
+					<li class="s22" data-id="22">Bobigny - Pablo Picasso</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m7_s" data-line="7">
+					<li class="s1" data-id="1">Charles de Gaulle &Eacute;toile</li>
+					<li class="s2" data-id="2">Kl&eacute;ber</li>
+					<li class="s3" data-id="3">Boissi&egrave;re</li>
+					<li class="s4" data-id="4">Trocad&eacute;ro</li>
+					<li class="s5" data-id="5">Passy</li>
+					<li class="s6" data-id="6">Bir-Hakeim</li>
+					<li class="s7" data-id="7">Dupleix</li>
+					<li class="s8" data-id="8">La Motte-Picquet - Grenelle</li>
+					<li class="s9" data-id="9">Cambronne</li>
+					<li class="s10" data-id="10">S&egrave;vres - Lecourbe</li>
+					<li class="s11" data-id="11">Pasteur</li>
+					<li class="s12" data-id="12">Montparnasse Bienven&uuml;e</li>
+					<li class="s13" data-id="13">Edgar Quinet</li>
+					<li class="s14" data-id="14">Raspail</li>
+					<li class="s15" data-id="15">Denfert-Rochereau</li>
+					<li class="s16" data-id="16">Saint-Jacques</li>
+					<li class="s17" data-id="17">Glaci&egrave;re</li>
+					<li class="s18" data-id="18">Corvisart</li>
+					<li class="s19" data-id="19">Place d'Italie</li>
+					<li class="s20" data-id="20">Nationale</li>
+					<li class="s21" data-id="21">Chevaleret</li>
+					<li class="s22" data-id="22">Quai de la Gare</li>
+					<li class="s23" data-id="23">Bercy</li>
+					<li class="s24" data-id="24">Dugommier</li>
+					<li class="s25" data-id="25">Daumesnil</li>
+					<li class="s26" data-id="26">Bel-Air</li>
+					<li class="s27" data-id="27">Picpus</li>
+					<li class="s28" data-id="28">Nation</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m8_s" data-line="8">
+					<li class="s1" data-id="1">Villejuif - Louis Aragon</li>
+					<li class="s2" data-id="2">Paul Vaillant-Couturier</li>
+					<li class="s3" data-id="3">Villejuif - L&eacute;o Lagrange</li>
+					<li class="s4" data-id="4">Le Kr&eacute;mlin-Bic&ecirc;tre</li>
+					<li class="s5" data-id="5">Mairie d'Ivry</li>
+					<li class="s6" data-id="6">Pierre Curie</li>
+					<li class="s7" data-id="7">Porte d'Ivry</li>
+					<li class="s8" data-id="8">Porte de Choisy</li>
+					<li class="s9" data-id="9">Porte d'Italie</li>
+					<li class="s10" data-id="10">Maison Blanche</li>
+					<li class="s11" data-id="11">Tolbiac</li>
+					<li class="s12" data-id="12">Place d'Italie</li>
+					<li class="s13" data-id="13">Les Gobelins</li>
+					<li class="s14" data-id="14">Censier - Daubenton</li>
+					<li class="s15" data-id="15">Place Monge</li>
+					<li class="s16" data-id="16">Jussieu</li>
+					<li class="s17" data-id="17">Sully - Morland</li>
+					<li class="s18" data-id="18">Pont Marie</li>
+					<li class="s19" data-id="19">Ch&acirc;telet</li>
+					<li class="s20" data-id="20">Pont Neuf</li>
+					<li class="s21" data-id="21">Palais Royal - Mus&eacute;e du Louvre</li>
+					<li class="s22" data-id="22">Pyramides</li>
+					<li class="s23" data-id="23">Op&eacute;ra</li>
+					<li class="s24" data-id="24">Chauss&eacute;e d'Antin - La Fayette</li>
+					<li class="s25" data-id="25">Le Peletier</li>
+					<li class="s26" data-id="26">Cadet</li>
+					<li class="s27" data-id="27">Poissonni&egrave;re</li>
+					<li class="s28" data-id="28">Gare de l'Est</li>
+					<li class="s29" data-id="29">Ch&acirc;teau-Landon</li>
+					<li class="s30" data-id="30">Louis Blanc</li>
+					<li class="s31" data-id="31">Stalingrad</li>
+					<li class="s32" data-id="32">Riquet</li>
+					<li class="s33" data-id="33">Crim&eacute;e</li>
+					<li class="s34" data-id="34">Corentin Cariou</li>
+					<li class="s35" data-id="35">Porte de la Villette</li>
+					<li class="s36" data-id="36">Aubervilliers - Pantin - Quatre Chemins</li>
+					<li class="s37" data-id="37">Fort d'Aubervilliers</li>
+					<li class="s38" data-id="38">La Courneuve - 8 Mai 1945</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m9_s" data-line="9">
+					<li class="s1" data-id="1">Louis Blanc</li>
+					<li class="s2" data-id="2">Jaur&egrave;s</li>
+					<li class="s3" data-id="3">Bolivar</li>
+					<li class="s4" data-id="4">Buttes Chaumont</li>
+					<li class="s5" data-id="5">Botzaris</li>
+					<li class="s6" data-id="6">Danube</li>
+					<li class="s7" data-id="7">Place des F&ecirc;tes</li>
+					<li class="s8" data-id="8">Pr&eacute;-Saint-Gervais</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m10_s" data-line="10">
+					<li class="s1" data-id="1">Balard</li>
+					<li class="s2" data-id="2">Lourmel</li>
+					<li class="s3" data-id="3">Boucicaut</li>
+					<li class="s4" data-id="4">F&eacute;lix Faure</li>
+					<li class="s5" data-id="5">Commerce</li>
+					<li class="s6" data-id="6">La Motte-Picquet - Granelle</li>
+					<li class="s7" data-id="7">&Eacute;cole Militaire</li>
+					<li class="s8" data-id="8">La Tour-Maubourg</li>
+					<li class="s9" data-id="9">Invalides</li>
+					<li class="s10" data-id="10">Concorde</li>
+					<li class="s11" data-id="11">Madeleine</li>
+					<li class="s12" data-id="12">Op&eacute;ra</li>
+					<li class="s13" data-id="13">Richelieu - Drout</li>
+					<li class="s14" data-id="14">Grands Boulevards</li>
+					<li class="s15" data-id="15">Bonne Nouvelle</li>
+					<li class="s16" data-id="16">Starsbourg - Saint-Denis</li>
+					<li class="s17" data-id="17">R&eacute;publique</li>
+					<li class="s18" data-id="18">Filles du Calvaire</li>
+					<li class="s19" data-id="19">Saint-S&eacute;bastien - Froissart</li>
+					<li class="s20" data-id="20">Chemin Vert</li>
+					<li class="s21" data-id="21">Bastille</li>
+					<li class="s22" data-id="22">Ledru-Rollin</li>
+					<li class="s23" data-id="23">Faidherbe - Chaligny</li>
+					<li class="s24" data-id="24">Reuilly - Diderot</li>
+					<li class="s25" data-id="25">Montgallet</li>
+					<li class="s26" data-id="26">Daumesnil</li>
+					<li class="s27" data-id="27">Michel Bizot</li>
+					<li class="s28" data-id="28">Porte Dor&eacute;e</li>
+					<li class="s29" data-id="29">Porte de Charenton</li>
+					<li class="s30" data-id="30">Libert&eacute;</li>
+					<li class="s31" data-id="31">Charenton - &Eacute;coles</li>
+					<li class="s32" data-id="32">&Eacute;cole V&eacute;t&eacute;rinaire de Maisons-Alfort</li>
+					<li class="s33" data-id="33">Maison-Alfort - Stade</li>
+					<li class="s34" data-id="34">Maison-Alfort - Les Juilliottes</li>
+					<li class="s35" data-id="35">Cr&eacute;teil - L'&Eacute;chat</li>
+					<li class="s36" data-id="36">Cr&eacute;teil - Universit&eacute;</li>
+					<li class="s37" data-id="37">Cr&eacute;teil - Pr&eacute;fecture</li>
+					<li class="s38" data-id="38">Pointe du Lac</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m11_s" data-line="11">
+					<li class="s1" data-id="1">Pont de S&egrave;vres</li>
+					<li class="s2" data-id="2">Billancourt</li>
+					<li class="s3" data-id="3">Marcel Sembat</li>
+					<li class="s4" data-id="4">Porte de Saint-Cloud</li>
+					<li class="s5" data-id="5">Exelmans</li>
+					<li class="s6" data-id="6">Michel-Ange - Molitor</li>
+					<li class="s7" data-id="7">Michel-Ange - Auteuil</li>
+					<li class="s8" data-id="8">Jasmin</li>
+					<li class="s9" data-id="9">Ranelagh</li>
+					<li class="s10" data-id="10">La Muette</li>
+					<li class="s11" data-id="11">Rue de la Pompe</li>
+					<li class="s12" data-id="12">Trocad&eacute;ro</li>
+					<li class="s13" data-id="13">I&eacute;na</li>
+					<li class="s14" data-id="14">Alma - Marceau</li>
+					<li class="s15" data-id="15">Franklin D. Roosevelt</li>
+					<li class="s16" data-id="16">Saint-Philippe-du-Roule</li>
+					<li class="s17" data-id="17">Mirosmenil</li>
+					<li class="s18" data-id="18">Saint-Augustin</li>
+					<li class="s19" data-id="19">Havre - Caumartin</li>
+					<li class="s20" data-id="20">Chauss&eacute;e d'Antin - La Fayette</li>
+					<li class="s21" data-id="21">Richelieu - Drouot</li>
+					<li class="s22" data-id="22">Grands Boulevards</li>
+					<li class="s23" data-id="23">Bonne Nouvelle</li>
+					<li class="s24" data-id="24">Starsbourg - Saint-Denis</li>
+					<li class="s25" data-id="25">R&eacute;publique</li>
+					<li class="s26" data-id="26">Oberkampf</li>
+					<li class="s27" data-id="27">Saint-Ambroise</li>
+					<li class="s28" data-id="28">Voltaire</li>
+					<li class="s29" data-id="29">Charonne</li>
+					<li class="s30" data-id="30">Rue des Boulets</li>
+					<li class="s31" data-id="31">Nation</li>
+					<li class="s32" data-id="32">Buzenval</li>
+					<li class="s33" data-id="33">Mara&icirc;chers</li>
+					<li class="s34" data-id="34">Porte de Montreuil</li>
+					<li class="s35" data-id="35">Robespierre</li>
+					<li class="s36" data-id="36">Croix de Chavaux</li>
+					<li class="s37" data-id="37">Mairie de Montreuil</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m12_s" data-line="12">
+					<li class="s1" data-id="1">Boulogne - Pont de Saint-Cloud</li>
+					<li class="s2" data-id="2">Boulogne - Jean Jaur&egrave;s</li>
+					<li class="s3" data-id="3">Porte d'Auteuil</li>
+					<li class="s4" data-id="4">Michel-Ange - Auteuil</li>
+					<li class="s5" data-id="5">&Eacute;glise d'Auteuil</li>
+					<li class="s6" data-id="6">Michel-Ange - Molitor</li>
+					<li class="s7" data-id="7">Chardon Lagache</li>
+					<li class="s8" data-id="8">Mirabeau</li>
+					<li class="s9" data-id="9">Javel - Andr&eacute; Citro&euml;n</li>
+					<li class="s10" data-id="10">Charles Michels</li>
+					<li class="s11" data-id="11">Avenue &Eacute;mile Zola</li>
+					<li class="s12" data-id="12">La Motte-Picquet - Grenelle</li>
+					<li class="s13" data-id="13">S&eacute;gur</li>
+					<li class="s14" data-id="14">Duroc</li>
+					<li class="s15" data-id="15">Vaneau</li>
+					<li class="s16" data-id="16">S&egrave;vres - Babylone</li>
+					<li class="s17" data-id="17">Mabillon</li>
+					<li class="s18" data-id="18">Od&eacute;on</li>
+					<li class="s19" data-id="19">Cluny - La Sorbonne</li>
+					<li class="s20" data-id="20">Maubert - Mutualit&eacute;</li>
+					<li class="s21" data-id="21">Cardinal Lemoine</li>
+					<li class="s22" data-id="22">Jussieu</li>
+					<li class="s23" data-id="23">Gare d'Austerlitz</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m13_s" data-line="13">
+					<li class="s1" data-id="1">Ch&acirc;telet</li>
+					<li class="s2" data-id="2">H&ocirc;tel de Ville</li>
+					<li class="s3" data-id="3">Rambuteau</li>
+					<li class="s4" data-id="4">Arts et M&eacute;tiers</li>
+					<li class="s5" data-id="5">R&eacute;publique</li>
+					<li class="s6" data-id="6">Goncourt</li>
+					<li class="s7" data-id="7">Belleville</li>
+					<li class="s8" data-id="8">Pyr&eacute;n&eacute;es</li>
+					<li class="s9" data-id="9">Jourdain</li>
+					<li class="s10" data-id="10">Place des F&ecirc;tes</li>
+					<li class="s11" data-id="11">T&eacute;l&eacute;graphe</li>
+					<li class="s12" data-id="12">Porte des Lilas</li>
+					<li class="s13" data-id="13">Mairie des Lilas</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m14_s" data-line="14">
+					<li class="s1" data-id="1">Mairie d'Issy</li>
+					<li class="s2" data-id="2">Corentin Celton</li>
+					<li class="s3" data-id="3">Porte de Versailles</li>
+					<li class="s4" data-id="4">Convention</li>
+					<li class="s5" data-id="5">Vaugirard</li>
+					<li class="s6" data-id="6">Volontaires</li>
+					<li class="s7" data-id="7">Pasteur</li>
+					<li class="s8" data-id="8">Falgui&egrave;re</li>
+					<li class="s9" data-id="9">Montparnasse Bienven&uuml;e</li>
+					<li class="s10" data-id="10">Notre-Dames-des-Champs</li>
+					<li class="s11" data-id="11">Rennes</li>
+					<li class="s12" data-id="12">S&egrave;vres - Babylone</li>
+					<li class="s13" data-id="13">Rue du Bac</li>
+					<li class="s14" data-id="14">Solf&eacute;rino</li>
+					<li class="s15" data-id="15">Assembl&eacute;e Nationale</li>
+					<li class="s16" data-id="16">Concorde</li>
+					<li class="s17" data-id="17">Madeleine</li>
+					<li class="s18" data-id="18">Saint-Lazare</li>
+					<li class="s19" data-id="19">Trinit&eacute; - d'Estienne d'Orves</li>
+					<li class="s20" data-id="20">Notre-Dame-de-Lorette</li>
+					<li class="s21" data-id="21">Saint-Georges</li>
+					<li class="s22" data-id="22">Pigalle</li>
+					<li class="s23" data-id="23">Abbesses</li>
+					<li class="s24" data-id="24">Lamarck - Caulaincourt</li>
+					<li class="s25" data-id="25">Jules Joffrin</li>
+					<li class="s26" data-id="26">Marcadet - Poissonniers</li>
+					<li class="s27" data-id="27">Marx Dormoy</li>
+					<li class="s28" data-id="28">Porte de la Chapelle</li>
+					<li class="s29" data-id="29">Front Populaire</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m15_s" data-line="15">
+					<li class="s1" data-id="1">Ch&acirc;tillon - Montrouge</li>
+					<li class="s2" data-id="2">Malakoff - Rue &Eacute;tienne Dolet</li>
+					<li class="s3" data-id="3">Malakoff - Plateau de Vanves</li>
+					<li class="s4" data-id="4">Porte de Vanves</li>
+					<li class="s5" data-id="5">Plaisance</li>
+					<li class="s6" data-id="6">Pernety</li>
+					<li class="s7" data-id="7">Ga&icirc;t&eacute;</li>
+					<li class="s8" data-id="8">Montparnasse - Bienven&uuml;e</li>
+					<li class="s9" data-id="9">Duroc</li>
+					<li class="s10" data-id="10">Saint-Fran&ccedil;ois-Xavier</li>
+					<li class="s11" data-id="11">Varenne</li>
+					<li class="s12" data-id="12">Invalides</li>
+					<li class="s13" data-id="13">Champs-&Eacute;lys&eacute;es - Clemenceau</li>
+					<li class="s14" data-id="14">Mirosmesnil</li>
+					<li class="s15" data-id="15">Saint-Lazare</li>
+					<li class="s16" data-id="16">Li&egrave;ge</li>
+					<li class="s17" data-id="17">Place de Clichy</li>
+					<li class="s18" data-id="18">La Fourche</li>
+					<li class="s19" data-id="19">Brochant</li>
+					<li class="s20" data-id="20">Porte de Clichy</li>
+					<li class="s21" data-id="21">Mairie de Clichy</li>
+					<li class="s22" data-id="22">Gabriel P&eacute;ri</li>
+					<li class="s23" data-id="23">Les Agnettes</li>
+					<li class="s24" data-id="24">Asni&egrave;res - Gennevilliers - Les Courtilles</li>
+					<li class="s25" data-id="25">Guy M&ocirc;quet</li>
+					<li class="s26" data-id="26">Porte de Saint-Ouen</li>
+					<li class="s27" data-id="27">Garibaldi</li>
+					<li class="s28" data-id="28">Mairie de Saint-Ouen</li>
+					<li class="s29" data-id="29">Carrefour Pleyel</li>
+					<li class="s30" data-id="30">Saint-Denis - Porte de Paris</li>
+					<li class="s31" data-id="31">Basilique de Saint-Denis</li>
+					<li class="s32" data-id="32">Saint-Denis - Universit&eacute;</li>
+				</ul>
+			</li>
+			<li>
+				<ul id="m16_s" data-line="16">
+					<li class="s1" data-id="1">Saint-Lazare</li>
+					<li class="s2" data-id="2">Madeleine</li>
+					<li class="s3" data-id="3">Pyramides</li>
+					<li class="s4" data-id="4">Ch&acirc;telet</li>
+					<li class="s5" data-id="5">Gare de Lyon</li>
+					<li class="s6" data-id="6">Bercy</li>
+					<li class="s7" data-id="7">Court Saint-&Eacute;milion</li>
+					<li class="s8" data-id="8">Biblioth&egrave;que Fran&ccedil;ois Mitterrand</li>
+					<li class="s9" data-id="9">Olympiades</li>
+				</ul>
+			</li>
+		</ul>
+		<div class="viewportmap">
+			<img class="metrolines hide" src="images/img-metro-paris.svg" alt="Metro Paris">
+			<img class="mapparis hide" src="images/img-map-paris.svg" alt="Map Paris">
+		</div>
+	</div>
+	
+	<!-- Referential datas -->
+	<div class="referential_datas">
+		<span class="ref_name"></span>
+		<span class="ref_idLine"></span>
+		<span class="ref_idStation"></span>
+	</div>
+</div>
+
+
+<!--- ========= FOOTER ========= -->
+<div id="footersection" style="display:none">	
+	<!-- Social -->
+
+	<div class="sharepanel">
+		<a class="fbshare" href="https://www.facebook.com/dialog/feed?app_id=177921619043021&amp;link=http://dataparis.io/&amp;picture=http://dataparis.io/img/dataparis-fb.jpg&amp;name=DataParis.io%20-%20Une%20dataviz%20sur%20Paris%20et%20les%20Parisiens&amp;caption=Des%20donn%C3%A9es%20sur%20Paris%20et%20les%20Parisiens%20localis%C3%A9es%20par%20le%20biais%20du%20r%C3%A9seau%20m%C3%A9tropolitain&amp;description=DataParis%20est%20une%20data%20visualisation%20qui%20met%20en%20avant%20des%20donn%C3%A9es%20sur%20Paris%20et%20les%20Parisiens%20localis%C3%A9es%20par%20le%20biais%20du%20r%C3%A9seau%20m%C3%A9tropolitain.&amp;redirect_uri=http://dataparis.io" target="_blank">Facebook</a>
+		<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://dataparis.io" data-text="DataParis.io : une dataviz interactive sur Paris et les Parisiens" data-lang="fr" data-hashtags="dataviz,paris,dataparis">Tweeter</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		<!--<div class="fb-like" data-href="http://dataparis.io" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-font="segoe ui"></div>-->
+	</div>
+
+
+	<div class="creditspanel hide">
+		<span></span>
+		<span>Informations et cr&eacute;dits</span>
+		<div class="creditscontent">
+			<div class="wrap">
+			<span class="close"></span>
+			<div class="approach">
+				<h3>Contexte</h3>
+				<p>DataParis est un projet scolaire r&eacute;alis&eacute; en 2013 par 4 &eacute;tudiants d'<a target="_blank" href="http://hetic.net">HETIC</a> de troisi&egrave;me ann&eacute;e.</p>
+			</div>
+			<div class="calcul">
+				<h3>Sources, calculs et interpr&eacute;tation des donn&eacute;es</h3>
+				<p>La majorit&eacute; des donn&eacute;es proviennent du dernier recensement de la population de l'<a target="_blank" href="http://insee.fr/fr/">INSEE</a> r&eacute;alis&eacute; en 2009.</p>
+				<ul>
+					<li><a target="_blank" href="http://www.statistiques-locales.insee.fr/FICHES/DL/ARM/DL_ARM75101.pdf">&bull; Voir le dossier complet pour le 1er arrondissement de Paris</a><span>exemple</span></li>
+					<li><a target="_blank" href="http://www.insee.fr/fr/ppp/bases-de-donnees/esl/DOC_DL.pdf">&bull; Voir la documentation du dossier complet</a></li>
+				</ul>
+				<p>D'autres donn&eacute;es comme pour le trafic entrant par station, le prix de l'immobilier, et l'opinion politique proviennent de la <a target="_blank" href="http://data.ratp.fr/fr/les-donnees/fiche-de-jeu-de-donnees/dataset/trafic-annuel-entrant-par-station-2011.html">RATP</a>, de la <a target="_blank" href="http://basebien.com/">base BIEN</a> + <a target="_blank" href="http://insee.fr/fr/">Notaires INSEE</a>, ainsi que du <a target="_blank" href="http://www.interieur.gouv.fr/Elections/Les-resultats/Presidentielles/elecresult__PR2012/(path)/PR2012/index.html">minist&egrave;re de l'Int&eacute;rieur</a>. Toutes les donn&eacute;es hormis les donn&eacute;es du trafic entrant par station sont bas&eacute;es sur les arrondissements de Paris et les villes aux alentours de la ville de Paris.</p>
+				<p>Lorsque qu'une station de m&eacute;tro chevauche plusieurs arrondissements, nous proc&eacute;dons &agrave; la moyenne de ces arrondissements. Exemple de calcul pour le taux de ch&ocirc;mage : (somme des ch&ocirc;meurs en unit&eacute; des arrondissements ou villes concern&eacute;s / somme de la population de 15 ans ou plus en unit&eacute; des arrondissements ou villes concern&eacute;s) * 100.</p>
+				<p><strong>Cette data visualisation n'a pas vocation &agrave; &ecirc;tre une &eacute;tude pr&eacute;cise mais plut&ocirc;t un observatoire de tendances bas&eacute; sur des sources fiables.</strong></p>
+			</div>
+			<div class="mentions">
+				<h3>Cr&eacute;dits</h3>
+				<ul>
+					<li><a target="_blank" href="https://twitter.com/GillesBertaux">Gilles Bertaux</a><span>Gestion du projet, communication</span></li>
+					<li><a target="_blank" href="https://twitter.com/RemiFayolle">R&eacute;mi Fayolle</a><span>Design</span></li>
+					<li><a target="_blank" href="https://twitter.com/VincentGarreau">Vincent Garreau</a><span>D&eacute;veloppement, design</span></li>
+					<li><a target="_blank" href="http://robinlambert.fr">Robin Lambert</a><span>Conception</span></li>
+				</ul>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="js/lib-jquery-2.0.2.min.js"></script>
+<script src="js/1981-js-app.min.js"></script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-41765111-1', 'dataparis.io');
+  ga('send', 'pageview');
+</script>
+<!-- Google Tag Manager -->
+<script>
+window.dataLayer = window.dataLayer || [];
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W4L95Q');
+</script>
+<!-- End Google Tag Manager -->
+<script src="js/9351-js-ga_events.js"></script>
+</body>
+</html>
